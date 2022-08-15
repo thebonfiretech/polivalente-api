@@ -1,6 +1,6 @@
 export const loggerConfig = {
     usePrefix: true,
-    prefix: '[logger]',
+    prefix: '[polialente-api]',
     prefixColor: 'magenta',
     info: {
 
