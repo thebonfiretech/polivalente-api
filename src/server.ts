@@ -1,9 +1,15 @@
-import express from "express" 
+import chalk from 'chalk';
+
+import logger from './utils/logger';
+import { app } from './app';
 
 
-const app = express();
-const PORT = 8080
+const PORT = process.env.PORT || 3000
+const server = app.listen(PORT, async () => {
+    logger.info(`🚀 server started on ${chalk.yellowBright.underline('https://localhost:' + PORT)}.`);
+});
 
-app.listen(PORT, () => console.log("Server online em http://localhost:8080"));
-
-app.get("/", (req,res) => res.sendStatus(200))
+process.on('SIGINT', () => {
+    server.close()
+   logger.warning('finished application')
+})
