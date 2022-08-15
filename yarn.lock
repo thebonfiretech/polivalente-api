@@ -1202,7 +1202,7 @@ chalk@^2.0.0:
     escape-string-regexp "^1.0.5"
     supports-color "^5.3.0"
 
-chalk@^4.0.0, chalk@^4.1.2:
+chalk@^4.0.0:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-4.1.2.tgz#aac4e2b7734a740867aeb16bf02aad556a1e7a01"
   integrity sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==
@@ -2053,14 +2053,6 @@ grapheme-splitter@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/grapheme-splitter/-/grapheme-splitter-1.0.4.tgz#9cf3a665c6247479896834af35cf1dbb4400767e"
   integrity sha512-bzh50DW9kTPM00T8y4o8vQg89Di9oLJVLW/KaOGIXJWP/iqCN6WKYkbNOF04vFLJhwcpYUh9ydh/+5vpOqV4YQ==
-
-gulog@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/gulog/-/gulog-2.0.0.tgz#1b7bbfaf61801bc2e8440ccb46fab5e29ce54e50"
-  integrity sha512-n5a0hlzBTySIm/LauPqSYc9qF50Swe9/uxd1VmySSMQA5VAD5qPBbVWD/n9ZEmfJxz8whz1A6M2wJvTKTqznFA==
-  dependencies:
-    chalk "^4.1.2"
-    deepmerge "^4.2.2"
 
 has-bigints@^1.0.1, has-bigints@^1.0.2:
   version "1.0.2"
