@@ -14,13 +14,16 @@ const sendError = (res, errorMessage: string, replaceMessage?: string) => {
   errorMessage = error.message.replace("%%%", replaceMessage);
 
   try {
+
     logger.error(errorMessage);
+    
     return res.status(error.statusCode).json({
-      error: {
+      error:{
         code: error.statusCode,
         message: errorMessage,
-      },
+      }
     });
+      
   } catch {}
 };
 

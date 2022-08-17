@@ -2,5 +2,28 @@
     "internal_error": {
         "message": "Internal error.",
         "statusCode": 500
+    },
+    "menu_unavailable": {
+        "message": "Menu unavailable.",
+        "statusCode": 204
+    },
+    "calendary_unavailable": {
+        "message": "Calendary unavailable.",
+        "statusCode": 204
+    },
+    "warns_unavailable": {
+        "message": "Warns unavailable.",
+        "statusCode": 204
+    },
+
+    "message_does_not_exist":{
+        "message":"this message does not exist",
+        "status":404
+    },
+
+    "date_does_not_exist":{
+        "message":"this date does not exist",
+        "status":404
     }
+
 }
