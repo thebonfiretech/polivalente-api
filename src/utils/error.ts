@@ -16,8 +16,8 @@ const sendError = (res, errorMessage: string, replaceMessage?: string) => {
   try {
 
     logger.error(errorMessage);
-    
-    return res.status(error.statusCode).json({
+
+    res.status(error.statusCode).json({
       error:{
         code: error.statusCode,
         message: errorMessage,
