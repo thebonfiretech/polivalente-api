@@ -39,7 +39,7 @@ export default class UserService {
       size: x.size,
     }));
     var userFind = students.data.find((x) => x?.name == name);
-    console.log(name, userFind);
+
     if (!userFind) return sendError(res, "unauthorized_user");
     if (userFind?.registered) return sendError(res, "user_already_registered");
     if (userFind?.desatived) return sendError(res, "user_already_registered");
@@ -65,7 +65,7 @@ export default class UserService {
     var registered = await get(registeredRef).then((x) => x.val());
     update(registeredRef, { registered: registered.registered + 1 });
 
-    const classRef = ref(database, "classes/" + userFind.class + "/students");
+    const classRef = ref(database, "class/" + userFind.class + "/students");
     var classFind = await get(classRef).then((x) => ({
       data: x.val(),
       size: x.size,
@@ -74,7 +74,7 @@ export default class UserService {
     update(
       ref(
         database,
-        "classes/" + userFind.class + "/students/" + (classFind.size + 1)
+        "class/" + userFind.class + "/students/" + (classFind.size + 1)
       ),
       {
         name,
@@ -104,20 +104,20 @@ export default class UserService {
 
   async reportCard(userId, res: Response) {
     const database = getDatabase();
-    const user = await this.me({id: userId}, res);
+    const user = await this.me({ id: userId }, res);
     const reference = ref(database, "school/reportCards/" + userId);
-    const reportCard = await get(reference).then(x => {
-        if (!x.exists()) return sendError(res, "reportcard_unavailable");
-        return x.val();
-    })
-    return reportCard
+    const reportCard = await get(reference).then((x) => {
+      if (!x.exists()) return sendError(res, "reportcard_unavailable");
+      return x.val();
+    });
+    return reportCard;
   }
   async updateReportCard(reportCardInfo, res: Response) {
-        const {userId, id, reportCard} = reportCardInfo;
-        const database = getDatabase();
-        const user = await this.me({id:userId}, res);
-        const reference = ref(database, `school/reportCards/${userId}/b${id}`);
-        await update(reference, reportCard)
+    const { userId, id, reportCard } = reportCardInfo;
+    const database = getDatabase();
+    const user = await this.me({ id: userId }, res);
+    const reference = ref(database, `school/reportCards/${userId}/b${id}`);
+    await update(reference, reportCard);
   }
   async historic(res: Response) {}
 }

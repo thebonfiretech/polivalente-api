@@ -19,4 +19,5 @@ app.use("/v1", router);
 
 app.use((err, req, res) => {
   sendError(res, "internal_error");
+  console.log(err);
 });
