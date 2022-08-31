@@ -115,9 +115,7 @@ export default class ClassService {
     });
     if (!data) return sendError(res, "class_unavailable");
 
-    delete data?.students;
     delete data?.warns;
-    delete data?.teachers;
     delete data?.schedule;
     return data;
   }

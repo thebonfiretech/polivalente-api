@@ -3,7 +3,7 @@ import { sign } from "jsonwebtoken";
 import { Response } from "express";
 import md5 from "crypto-js/md5";
 
-import { userSignIn, userSignUp } from "./dtos/user.dtos";
+import { userSignIn, userSignUp, teacherClasses, teacherData} from "./dtos/teacher.dtos";
 import authConfig from "src/config/auth";
 import sendError from "@utils/error";
 
@@ -12,12 +12,12 @@ export default class UserService {
     const { email, password } = user;
 
     const database = getDatabase();
-    const reference = ref(database, "school/students");
-    const students = await get(reference).then((x) => ({
+    const reference = ref(database, "school/teachers");
+    const teachers = await get(reference).then((x) => ({
       data: x.val(),
       size: x.size,
     }));
-    var userFind = students.data.find((x) => x?.email == email);
+    var userFind = teachers.data.find((x) => x?.email == email);
     if (!userFind.password || !userFind)
       return sendError(res, "user_not_found");
     const hashPassword = md5(password).toString();
@@ -33,53 +33,40 @@ export default class UserService {
     const { name, email, password, permissions } = user;
 
     const database = getDatabase();
-    const reference = ref(database, "school/students");
-    const students = await get(reference).then((x) => ({
+    const reference = ref(database, "school/teachers");
+    const teachers = await get(reference).then((x) => ({
       data: x.val(),
       size: x.size,
     }));
-    var userFind = students.data.find((x) => x?.name == name);
-
+    var userFind = teachers.data.find((x) => x?.name == name);
+  
     if (!userFind) return sendError(res, "unauthorized_user");
     if (userFind?.registered) return sendError(res, "user_already_registered");
     if (userFind?.desatived) return sendError(res, "user_already_registered");
-    const id = students.size + 1;
-
-    const data = {
+    const id = teachers.size + 1;
+    const data: teacherData = {
       password: md5(password).toString(),
       shift: userFind.shift,
-      class: userFind.class,
+      classes: userFind.classes,
       registered: true,
       desatived: false,
-      reportCard: null,
       historic: [],
       permissions,
       email,
       name,
       id: userFind.id,
     };
-    await update(ref(database, "school/students/" + data.id), data);
 
-    const registeredRef = ref(database, "statistics/users/");
-    var registered = await get(registeredRef).then((x) => x.val());
-    update(registeredRef, { registered: registered.registered + 1 });
 
-    const classRef = ref(database, "class/" + userFind.class + "/students");
-    var classFind = await get(classRef).then((x) => ({
-      data: x.val(),
-      size: x.size,
-    }));
-    if (!classFind?.size) classFind.size = 0;
-    update(
-      ref(
-        database,
-        "class/" + userFind.class + "/students/" + (classFind.size + 1)
-      ),
-      {
-        name,
-        id,
-      }
-    );
+    await update(ref(database, "school/teachers/" + data.id), data);
+
+    Object.values(userFind?.classes).forEach(async (x: teacherClasses ,i) => {
+      await update(ref(database, `class/${x.classID}/teachers/` + data.id), {
+        teacherID: data.id,
+        name: data.name,
+        matter: x.matter
+      });
+    })
 
     const { secret, expiresIn } = authConfig.jwt;
 
@@ -90,7 +77,7 @@ export default class UserService {
   async me(user, res: Response) {
     const { id } = user;
     const database = getDatabase();
-    const reference = ref(database, "school/students/" + id);
+    const reference = ref(database, "school/teachers/" + id);
     const currentUser = await get(reference).then((snapshot) => {
       if (!snapshot.exists()) return sendError(res, "user_not_found");
       return snapshot.val();
@@ -101,22 +88,5 @@ export default class UserService {
     return currentUser;
   }
 
-  async reportCard(userId, res: Response) {
-    const database = getDatabase();
-    const user = await this.me({ id: userId }, res);
-    const reference = ref(database, "school/reportCards/" + userId);
-    const reportCard = await get(reference).then((x) => {
-      if (!x.exists()) return sendError(res, "reportcard_unavailable");
-      return x.val();
-    });
-    return reportCard;
-  }
-  async updateReportCard(reportCardInfo, res: Response) {
-    const { userId, id, reportCard } = reportCardInfo;
-    const database = getDatabase();
-    const user = await this.me({ id: userId }, res);
-    const reference = ref(database, `school/reportCards/${userId}/b${id}`);
-    await update(reference, reportCard);
-  }
   async historic(res: Response) {}
 }
