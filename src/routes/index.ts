@@ -1,7 +1,6 @@
 import { Router } from "express";
 
 import statisticsRouter from "./statistics.router";
-import teacherRouter from "./teacher.router";
 import schoolRouter from "./school.router";
 import classRouter from "./class.router";
 import userRouter from "./user.router";
@@ -13,7 +12,6 @@ router.get("/ping", (req, res) => {
 });
 
 router.use("/statistics", statisticsRouter);
-router.use("/teacher", teacherRouter);
 router.use("/school", schoolRouter);
 router.use("/class", classRouter);
 router.use("/user", userRouter);

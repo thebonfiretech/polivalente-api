@@ -7,5 +7,4 @@ export interface userSignUp {
   email: string;
   password: string;
   name: string;
-  permissions: object;
 }

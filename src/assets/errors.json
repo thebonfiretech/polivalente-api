@@ -38,7 +38,7 @@
     "statusCode": 401
   },
   "user_not_found": {
-    "message": "User already registered",
+    "message": "User not found",
     "statusCode": 404
   },
   "incorrect_password": {
