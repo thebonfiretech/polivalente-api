@@ -1,6 +1,6 @@
 import chalk from "chalk";
 
-import sendError from '@utils/error'
+import sendError from './utils/error'
 import { connectToDatabase } from "./database/createConnection";
 import logger from "./utils/logger";
 import { app } from "./app";

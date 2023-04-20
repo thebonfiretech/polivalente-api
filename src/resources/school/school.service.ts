@@ -1,7 +1,7 @@
 import { getDatabase, ref, get, update, set, remove } from "firebase/database";
 import { Response } from "express";
 
-import sendError from "@utils/error";
+import sendError from "../../utils/error";
 
 interface menuConfig {
   drink: string;

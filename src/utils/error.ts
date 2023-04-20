@@ -1,6 +1,6 @@
 import { response } from "express";
 
-import errors from "@assets/errors.json";
+import errors from "../assets/errors.json";
 import logger from "./logger";
 
 const sendError = (res, errorMessage: string, replaceMessage?: string) => {

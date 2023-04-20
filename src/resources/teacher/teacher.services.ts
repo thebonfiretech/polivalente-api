@@ -5,7 +5,7 @@ import md5 from "crypto-js/md5";
 
 import { userSignIn, userSignUp, teacherClasses, teacherData} from "./dtos/teacher.dtos";
 import authConfig from "src/config/auth";
-import sendError from "@utils/error";
+import sendError from "../../utils/error";
 
 export default class UserService {
   async signIn(user: userSignIn, res: Response) {

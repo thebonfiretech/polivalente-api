@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import SchoolController from "@resources/school/school.controller";
+import SchoolController from "../resources/school/school.controller";
 
 const schoolController = new SchoolController();
 const schoolRouter = Router();

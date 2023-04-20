@@ -3,7 +3,7 @@ import { verify } from "jsonwebtoken";
 
 import { RequestWithUserRole } from "src/config/userRequestType";
 import authConfig from "../config/auth";
-import sendError from "@utils/error";
+import sendError from "../utils/error";
 
 const userAuthenticad = (
   req: RequestWithUserRole,

@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
-import UserController from '@resources/user/user.controller';
-import userAuthenticad from '@middlewares/userAuthenticad';
+import UserController from '../resources/user/user.controller';
+import userAuthenticad from '../middlewares/userAuthenticad';
 
 const userController = new UserController();
 const userRouter = Router();

@@ -1,7 +1,7 @@
 import { getDatabase} from "firebase/database";
 import { initializeApp } from "firebase/app";
 
-import logger from "@utils/logger";
+import logger from "../utils/logger";
 
 export  const connectToDatabase =  () => {
 

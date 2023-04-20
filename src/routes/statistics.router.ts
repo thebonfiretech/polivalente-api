@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
-import StatisticsController from '@resources/statistics/statistics.controller';
-import userAuthenticad from '@middlewares/userAuthenticad';
+import StatisticsController from '../resources/statistics/statistics.controller';
+import userAuthenticad from '../middlewares/userAuthenticad';
 
 const statisticsController = new StatisticsController();
 const statisticsRouter = Router();

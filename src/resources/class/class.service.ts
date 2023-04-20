@@ -1,6 +1,6 @@
 import { get, getDatabase, ref, update, set, remove } from "firebase/database";
 
-import sendError from "@utils/error";
+import sendError from "../../utils/error";
 
 export default class ClassService {
   async createWarn(warn, res: Response) {
