@@ -1,9 +1,9 @@
 import { response } from "express";
 
-import errors from "../assets/errors.json";
-import logger from "./logger";
+import errors from "../assets/errors.json" assert { type: "json" };
+import logger from "./logger.js";
 
-const sendError = (res, errorMessage: string, replaceMessage?: string) => {
+const sendError = (res, errorMessage, replaceMessage) => {
   errorMessage = errorMessage.toLowerCase();
 
   if (!errors[errorMessage]) {
@@ -19,7 +19,7 @@ const sendError = (res, errorMessage: string, replaceMessage?: string) => {
     res.status(error.statusCode).json({
       error:{
         code: error.statusCode,
-        message: errorMessage,
+        message: errorMessage
       }
     });
       

@@ -1,10 +1,8 @@
-import { Request, Response } from "express";
-import { RequestWithUserRole } from "src/config/userRequestType";
-import StatisticsService from "./statistics.service";
+import StatisticsService from "./statistics.service.js";
 
 export default class StatisticsController {
 
-    async avaliation(req: RequestWithUserRole, res: Response){
+    async avaliation(req, res){
         const userId = req?.user?.id;
         const avaliation = req.body
         const statisticsService = new StatisticsService()
@@ -12,7 +10,7 @@ export default class StatisticsController {
         return res.sendStatus(201)
      }
 
-    async chat(req: RequestWithUserRole, res: Response){
+    async chat(req, res){
         const userId = req?.user?.id;
         const avaliation = req.body
         const statisticsService = new StatisticsService()

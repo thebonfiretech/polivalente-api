@@ -1,14 +1,13 @@
 import { getDatabase, ref, get, update } from "firebase/database";
-import { sign } from "jsonwebtoken";
-import { Response } from "express";
-import md5 from "crypto-js/md5";
+import jwt from "jsonwebtoken";
+import crypto from "crypto-js";
 
-import { userSignIn, userSignUp } from "./dtos/user.dtos";
-import authConfig from "src/config/auth";
-import sendError from "../../utils/error";
+
+import authConfig from "../../config/auth.js";
+import sendError from "../../utils/error.js";
 
 export default class UserService {
-  async signIn(user: userSignIn, res: Response) {
+  async signIn(user, res) {
     const { email, password } = user;
     const database = getDatabase();
     const reference = ref(database, "users/");
@@ -17,14 +16,14 @@ export default class UserService {
     }));
     var userFind = users.data.find((x) => x?.email == email);
     if (!userFind || !userFind.password) return sendError(res, "user_not_found");
-    const hashPassword = md5(password).toString();
+    const hashPassword = crypto.MD5(password).toString();
     if (hashPassword !== userFind.password) return sendError(res, "incorrect_password");
     const { secret, expiresIn } = authConfig.jwt;
-    const token = sign(userFind, secret, { expiresIn });
+    const token = jwt.sign(userFind, secret, { expiresIn });
     return { acessToken: token };
   }
 
-  async signUp(user: userSignUp, res: Response) {
+  async signUp(user, res) {
     const { name, email, password } = user;
 
     const changeName = (name) => name?.toLowerCase().replace(/\s+/g, '');
@@ -43,7 +42,7 @@ export default class UserService {
     const id = users.size + 1;
 
     const data = {
-      password: md5(password).toString(),
+      password: crypto.MD5(password).toString(),
       roles: userFind?.roles ? userFind.roles : [],
       shift: userFind.shift,
       class: userFind.class,
@@ -56,11 +55,11 @@ export default class UserService {
     await update(ref(database, "users/" + data.id), data);
 
     const { secret, expiresIn } = authConfig.jwt;
-    const token = sign(data, secret, { expiresIn });
+    const token = jwt.sign(data, secret, { expiresIn });
     return { acessToken: token };
   }
 
-  async me(user, res: Response) {
+  async me(user, res) {
     const { id } = user;
     const database = getDatabase();
     const reference = ref(database, "users/" + id);

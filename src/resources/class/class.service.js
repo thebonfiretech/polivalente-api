@@ -1,9 +1,9 @@
 import { get, getDatabase, ref, update, set, remove } from "firebase/database";
+import sendError from "../../utils/error.js";
 
-import sendError from "../../utils/error";
 
 export default class ClassService {
-  async createWarn(warn, res: Response) {
+  async createWarn(warn, res) {
     const { classID } = warn;
     const database = getDatabase();
     var amount = await get(ref(database, `class/${classID}/warns/amount`)).then(
@@ -22,7 +22,7 @@ export default class ClassService {
     };
   }
 
-  async deleteWarn(classID, id, res: Response) {
+  async deleteWarn(classID, id, res) {
     const database = getDatabase();
     const reference = ref(database, `class/${classID}/warns/${id}`);
     const data = await get(reference).then(async (snapshot) => {

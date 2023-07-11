@@ -1,27 +1,11 @@
 import { getDatabase, ref, get, update, set, remove } from "firebase/database";
-import { Response } from "express";
 
-import sendError from "../../utils/error";
 
-interface menuConfig {
-  drink: string;
-  fruit: string;
-  food: string;
-  date: string;
-}
+import sendError from "../../utils/error.js";
 
-interface warnTypes {
-  id: number;
-  text: string;
-  permissions: object;
-  edited: boolean;
-  date: Date;
-  authorId: Number;
-  authorDisplayURL: string;
-}
 
 export default class SchoolService {
-  async menu(shift: string, res: Response) {
+  async menu(shift, res) {
     const database = getDatabase();
     const reference = ref(database, "school/menu/" + shift);
     const data = await get(reference).then(async (snapshot) => {
@@ -31,13 +15,13 @@ export default class SchoolService {
     return data;
   }
 
-  async refreshMenu(shift: string, menu: menuConfig, res: Response) {
+  async refreshMenu(shift, menu, res) {
     const database = getDatabase();
     const reference = ref(database, "school/menu/" + shift);
     await update(reference, menu);
   }
 
-  async createWarn(warn, res: Response) {
+  async createWarn(warn, res) {
     const database = getDatabase();
     var amount = await get(ref(database, "school/warns/amount")).then((x) =>
       x.val()
@@ -54,7 +38,7 @@ export default class SchoolService {
     };
   }
 
-  async deleteWarn(id, res: Response) {
+  async deleteWarn(id, res) {
     const database = getDatabase();
     const reference = ref(database, "school/warns/" + id);
     const data = await get(reference).then(async (snapshot) => {
@@ -64,7 +48,7 @@ export default class SchoolService {
     await remove(reference);
   }
 
-  async editWarn(id, text, res: Response) {
+  async editWarn(id, text, res) {
     const database = getDatabase();
     const reference = ref(database, "school/warns/" + id);
     const data = await get(reference).then(async (snapshot) => {
@@ -99,7 +83,7 @@ export default class SchoolService {
       warns: warnsList,
     };
   }
-  async createDate(date, res: Response) {
+  async createDate(date, res) {
     const database = getDatabase();
     var amount = await get(ref(database, "school/calendary/amount")).then((x) =>
       x.val()
@@ -116,7 +100,7 @@ export default class SchoolService {
     };
   }
 
-  async deleteDate(id, res: Response) {
+  async deleteDate(id, res) {
     const database = getDatabase();
     const reference = ref(database, "school/calendary/" + id);
     const data = await get(reference).then(async (snapshot) => {

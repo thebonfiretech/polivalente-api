@@ -5,8 +5,8 @@ import helmet from "helmet";
 import morgan from "morgan";
 import cors from "cors";
 
-import { router } from "./routes/index";
-import sendError from "./utils/error";
+import { router } from "./routes/index.js";
+import sendError from "./utils/error.js";
 
 export const app = express();
 

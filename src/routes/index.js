@@ -1,9 +1,9 @@
 import { Router } from "express";
 
-import statisticsRouter from "./statistics.router";
-import schoolRouter from "./school.router";
-import classRouter from "./class.router";
-import userRouter from "./user.router";
+import statisticsRouter from "./statistics.router.js";
+import schoolRouter from "./school.router.js";
+import classRouter from "./class.router.js";
+import userRouter from "./user.router.js";
 
 export const router = Router();
 

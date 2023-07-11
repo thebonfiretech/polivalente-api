@@ -1,9 +1,9 @@
 import chalk from "chalk";
 
-import sendError from './utils/error'
-import { connectToDatabase } from "./database/createConnection";
-import logger from "./utils/logger";
-import { app } from "./app";
+import sendError from './utils/error.js'
+import { connectToDatabase } from "./database/createConnection.js";
+import logger from "./utils/logger.js";
+import { app } from "./app.js";
 
 const PORT = process.env.PORT || 3000;
 

@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.ts",
+  "type": "module",
   "scripts": {
-    "dev": "npx nodemon --exec ts-node -r tsconfig-paths/register index.ts",
+    "dev": "nodemon src/server.js --trace-warnings",
     "build": "tsc -p ./tsconfig.json"
   },
   "author": "",
