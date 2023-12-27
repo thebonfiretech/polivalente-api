@@ -12,7 +12,25 @@ const UserSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: true
+  },
+  userClass:{
+    type: String
+  },
+  role:{
+    type: String
+  },
+  flags: {
+    type: Object
+  },
+  status:{
+    type: String,
+    default: 'notRegistered'
+  },
+  grades:{
+    type:Object
+  },
+  teacherClass:{
+    type: Object
   }
 });
 

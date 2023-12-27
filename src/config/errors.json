@@ -4,23 +4,27 @@
         "statusCode": 500
     },
     "token_is_not_valid": {
-        "message": "Token is not valid",
+        "message": "Token de autorização invalido",
         "statusCode": 401
     },
     "no_token": {
-        "message": "No token, authorization denied",
+        "message": "Sem token de autorização",
         "statusCode": 400
     },
     "invalid_credentials": {
-        "message": "Invalid Credentials",
+        "message": "Credenciais invalidas",
         "statusCode": 401
     },
-    "user_already_exists": {
-        "message": "User already exists",
+    "email_already_exists": {
+        "message": "Email já cadastrado",
         "statusCode": 401
     },
     "user_not_found":{
-        "message": "user not found",
+        "message": "Usuario não encontrado",
+        "statusCode": 404
+    },
+    "user_not_registered":{
+        "message": "Usuario não cadastrado",
         "statusCode": 404
     }
 }

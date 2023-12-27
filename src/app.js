@@ -21,7 +21,6 @@ export const app = express();
 connectDB();
 const CronsService = new Crons();
 
-
 const handleFormDataAndJSON = (req, res, next) => {
   const contentType = req.headers['content-type'];
   if (contentType && contentType.startsWith('multipart/form-data')) {
