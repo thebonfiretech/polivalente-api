@@ -12,7 +12,7 @@ log.setup({
 
 
 const PORT = process.env.PORT || 6060
-const server = app.listen(7071, async (a) => {
+const server = app.listen(PORT, async (a) => {
     log.info(`🚀 Server iniciado em ${chalk.cyan('http://localhost:')}${chalk.cyan(process.env.PORT || 6060)}.`);
 });
 

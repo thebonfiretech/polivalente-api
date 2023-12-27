@@ -19,28 +19,8 @@
         "message": "User already exists",
         "statusCode": 401
     },
-    "package_not_found":{
-        "message": "package not found",
-        "statusCode": 400
-    },
-    "file_not_found":{
-        "message": "file not found",
-        "statusCode": 400
-    },
-    "coupon_not_found":{
-        "message": "coupon not found",
-        "statusCode": 404
-    },
     "user_not_found":{
         "message": "user not found",
-        "statusCode": 404
-    },
-    "payment_not_found":{
-        "message": "payment not found",
-        "statusCode": 404
-    },
-    "historic_not_found":{
-        "message": "historic not found",
         "statusCode": 404
     }
 }
