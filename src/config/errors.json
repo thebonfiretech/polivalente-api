@@ -19,8 +19,16 @@
         "message": "Email já cadastrado",
         "statusCode": 401
     },
+    "class_already_exists": {
+        "message": "Turma existente.",
+        "statusCode": 401
+    },
     "user_not_found":{
         "message": "Usuario não encontrado",
+        "statusCode": 404
+    },
+    "class_not_found":{
+        "message": "Turma não encontrada.",
         "statusCode": 404
     },
     "user_not_registered":{

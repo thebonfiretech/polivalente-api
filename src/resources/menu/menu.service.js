@@ -4,7 +4,7 @@ export default class menuService {
 
     async getMenu({}){
         try {
-
+            
         } catch (err) {
             return { error: "internal_error" } ;
         }
