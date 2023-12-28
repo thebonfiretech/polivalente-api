@@ -35,6 +35,10 @@
         "message": "Menu não encontrado.",
         "statusCode": 404
     },
+    "sac_not_found":{
+        "message": "Sac não encontrado.",
+        "statusCode": 404
+    },
     "user_not_registered":{
         "message": "Usuario não cadastrado.",
         "statusCode": 404
