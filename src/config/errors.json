@@ -1,22 +1,22 @@
 {
     "internal_error": {
-        "message": "Server Error",
+        "message": "Server Error.",
         "statusCode": 500
     },
     "token_is_not_valid": {
-        "message": "Token de autorização invalido",
+        "message": "Token de autorização invalido.",
         "statusCode": 401
     },
     "no_token": {
-        "message": "Sem token de autorização",
+        "message": "Sem token de autorização.",
         "statusCode": 400
     },
     "invalid_credentials": {
-        "message": "Credenciais invalidas",
+        "message": "Credenciais invalidas.",
         "statusCode": 401
     },
     "email_already_exists": {
-        "message": "Email já cadastrado",
+        "message": "Email já cadastrado.",
         "statusCode": 401
     },
     "class_already_exists": {
@@ -24,15 +24,19 @@
         "statusCode": 401
     },
     "user_not_found":{
-        "message": "Usuario não encontrado",
+        "message": "Usuario não encontrado.",
         "statusCode": 404
     },
     "class_not_found":{
         "message": "Turma não encontrada.",
         "statusCode": 404
     },
+    "menu_not_found":{
+        "message": "Menu não encontrado.",
+        "statusCode": 404
+    },
     "user_not_registered":{
-        "message": "Usuario não cadastrado",
+        "message": "Usuario não cadastrado.",
         "statusCode": 404
     }
 }
