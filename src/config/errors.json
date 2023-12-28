@@ -39,6 +39,10 @@
         "message": "Sac não encontrado.",
         "statusCode": 404
     },
+    "warn_not_found":{
+        "message": "Warn não encontrado.",
+        "statusCode": 404
+    },
     "user_not_registered":{
         "message": "Usuario não cadastrado.",
         "statusCode": 404
