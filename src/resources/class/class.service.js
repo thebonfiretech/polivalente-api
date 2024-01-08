@@ -13,12 +13,13 @@ export default class classService {
                 identifier, 
                 shift, 
                 description
-            }, { new: true});
+            });
 
             await classe.save();
 
             return { class: classe }
         } catch (err) {
+            console.log(err)
             return { error: "internal_error" } ;
         }
     }
