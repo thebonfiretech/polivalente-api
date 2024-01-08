@@ -17,8 +17,8 @@ export default class usersController {
     return res.status(200).json(response);
   }
 
-  async getUser(req, res){
-    var id = req.user.id;
+  async getCurrentUser(req, res){
+    var id = req.user._id;
     const service = new UsersService()
     const response = await service.getUserById({id})
     if (response?.error) return sendError(res, response.error);
@@ -26,10 +26,9 @@ export default class usersController {
   }
 
   async updateCurrentUser(req, res){
-    var id = req.user.id;
-    var data = req.body;
+    var id = req.user._id;
     const service = new UsersService()
-    const response = await service.updateUser({id, data})
+    const response = await service.updateUser({id, data: req.body?.data})
     if (response?.error) return sendError(res, response.error);
     return res.status(200).json(response);
   }

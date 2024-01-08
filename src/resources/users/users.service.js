@@ -7,11 +7,14 @@ export default class usersService {
 
     async signUp({name, email, password}){
         try {
-            const findUser = await userModel.findOne({name});
-            if (!findUser) return { error: "user_not_registered"};
+            const findUsers = await userModel.find({
+              status: "notRegistered",
+            });
+            var findUser = findUsers.find(x => x.name.trim().replace(/\s/g, '') == name.trim().replace(/\s/g, ''));
+            if (!findUser) return { error: "user_not_registered" };
             
             const findEmail = await userModel.findOne({email});
-            if (!findEmail) return { error: "email_already_exists"};
+            if (findEmail) return { error: "email_already_exists"};
 
             const salt = await bcrypt.genSalt(10);
             const hash = await bcrypt.hash(password, salt);
@@ -47,7 +50,7 @@ export default class usersService {
                 _id: user._id
             }
             var token = jwt.sign(payload, process.env.JWT, { expiresIn : '5 days'});
-            return { user, token }
+            return { token }
            
         } catch (err) {
             return { error: "internal_error" } ;
@@ -59,13 +62,15 @@ export default class usersService {
            if (!user) return { error: "user_not_registered"};
            return { user };
         } catch (err) {
-            return { error: "internal_error" } ;
+            console.log(err)
+            return { error: "user_not_registered" } ;
         }
     }
     async updateUser({id, data}){
         try {
            const user = await userModel.findById(id);
            if (!user) return { error: "user_not_registered"};
+           console.log(data)
 
            const newUser = await userModel.findByIdAndUpdate(id, {$set: {...data}}, {new: true, upsert: true});
            return { user: newUser};
@@ -73,7 +78,7 @@ export default class usersService {
             return { error: "internal_error" } ;
         }
     }
-    async createUser({name, role, flags}){
+    async createUser({name, role, flags=[]}){
         try {
             const user = new userModel({
                 name,
@@ -86,6 +91,7 @@ export default class usersService {
             return { user }
            
         } catch (err) {
+            console.log(err)
             return { error: "internal_error" } ;
         }
     }

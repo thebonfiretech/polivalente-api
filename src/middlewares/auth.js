@@ -4,14 +4,13 @@ import log from 'gulog';
 import { sendError } from "../app.js";
 
 const auth = (req, res, next) => {
-
   var token = req.header('authorization');
   if (!token) return sendError(res, 'no_token');
-
+  
   try {
     jwt.verify(token, process.env.JWT, (error, decoded) => {
       if (error) return sendError(res, 'token_is_not_valid');
-        req.user = decoded.user;
+      req.user = decoded;
         next();
     });
   } catch (err) {

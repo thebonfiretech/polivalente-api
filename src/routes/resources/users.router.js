@@ -6,15 +6,15 @@ import auth from '../../middlewares/auth.js'
 const service = new usersController();
 const usersRouter = Router();
 
-usersRouter.post("/get-current-user", auth, service.getUser);
-usersRouter.put("/update-user", auth, service.signUp);
+usersRouter.put("/update-user",  auth, service.updateCurrentUser);
+usersRouter.get("/get-user", auth, service.getCurrentUser);
 usersRouter.post("/signin", service.signIn);
-usersRouter.get("/signup", service.signUp);
+usersRouter.post("/signup", service.signUp);
 
-usersRouter.put("/update-current-user", auth,  service.updateCurrentUser);
-usersRouter.post("/create-user", auth, service.createUser);
-usersRouter.post("/get-user", auth,  service.getUserById);
-usersRouter.get("/teachers", auth, service.getTeachers);
-usersRouter.get("/", auth, service.getUsers);
+usersRouter.post("/admin/create-user", service.createUser);
+usersRouter.put("/admin/update-user", service.updateUser);
+usersRouter.get("/admin/get-user",  service.getUserById);
+usersRouter.get("/admin/teachers", service.getTeachers);
+usersRouter.get("/admin/", service.getUsers);
 
 export default usersRouter;
