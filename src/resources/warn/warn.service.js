@@ -2,10 +2,10 @@ import warnModel from "../../models/warn.js";
 
 export default class WarnService {
 
-    async createWarn({author, type, description, title}){
+    async createWarn({author, flags, description, title}){
         try {
             const warn = new warnModel({
-                author, type, description, title
+                author, flags, description, title
             }, {new: true}) 
             await warn.save();
             return { warn }
