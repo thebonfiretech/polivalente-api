@@ -6,7 +6,7 @@ export default class sacService {
         try {
             const sac = new sacModel({
                 author, type, description
-            }, {new: true})
+            })
             await sac.save();
             return { sac }
         } catch (err) {
@@ -16,6 +16,7 @@ export default class sacService {
     async getSac({id}){
         try {
             const findSac = await sacModel.findById(id);
+            console.log(id, findSac)
             if (!findSac) return { error: "sac_not_found"}
             return { sac: findSac }
         } catch (err) {
