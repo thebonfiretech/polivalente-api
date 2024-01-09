@@ -1,23 +1,42 @@
 import menuModel from "../../models/menu.js";
 
 export default class menuService {
-
-    async getMenu({}){
-        try {
-            return await menuModel.findOne();
-        } catch (err) {
-            return { error: "internal_error" } ;
-        }
+  async getMenu({}) {
+    try {
+      return await menuModel.findOne();
+    } catch (err) {
+      return { error: "internal_error" };
     }
-    async updateMenu({id, data}){
-        try {
-            const findMenu = await menuModel.findById(id);
-            if (!findMenu) return { error: "menu_not_found"}
+  }
+  async updateMenu({ food, drink, fruit }) {
+    try {
+      const findMenu = await menuModel.findOne();
+      if (!findMenu) {
+        let newMenu = new menuModel({
+          food,
+          drink,
+          fruit,
+          lastUpdate: Date.now(),
+        });
 
-            const newMenu = await menuModel.findByIdAndUpdate(id, {$set:{ ...data}},{new: true,setDefaultsOnInsert: True});
-            return { menu: newMenu }
-        } catch (err) {
-            return { error: "internal_error" } ;
-        }
+        newMenu = await newMenu.save();
+        return { menu: newMenu };
+      }
+      var newMenu = await menuModel.findOneAndUpdate(
+        {
+          $set: {
+            food,
+            drink,
+            fruit,
+            lastUpdate: Date.now(),
+          },
+        },
+        { new: true, setDefaultsOnInsert: true }
+      );
+      return { menu: newMenu };
+    } catch (err) {
+        console.log(err)
+      return { error: "internal_error" };
     }
+  }
 }
