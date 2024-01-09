@@ -6,7 +6,7 @@ export default class WarnService {
         try {
             const warn = new warnModel({
                 author, flags, description, title
-            }, {new: true}) 
+            }) 
             await warn.save();
             return { warn }
         } catch (err) {
