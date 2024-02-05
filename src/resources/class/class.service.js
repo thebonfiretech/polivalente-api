@@ -32,6 +32,7 @@ export default class classService {
             return { class: newClass }
 
         } catch (err) {
+            console.log(err)
             return { error: "internal_error" } ;
         }
     }

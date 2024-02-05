@@ -21,6 +21,11 @@ const ClassSchema = new mongoose.Schema({
     },
     students:{
         type: Object
+
+    },
+    schedule:{
+        type: Object,
+
     }
 })
 

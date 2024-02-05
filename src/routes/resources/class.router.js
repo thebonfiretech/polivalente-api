@@ -10,6 +10,6 @@ classRouter.delete("/delete", auth, service.deleteClass);
 classRouter.post("/create", auth, service.createClass);
 classRouter.put("/update", auth, service.updateClass);
 classRouter.get("/all", auth, service.getAllClasses);
-classRouter.get("/", auth, service.getClass);
+classRouter.post("/", auth, service.getClass);
 
 export default classRouter;
